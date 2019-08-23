@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import "./styles.scss";
+import "./styling/styles.scss";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
