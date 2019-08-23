@@ -27,8 +27,7 @@ const Login = (props) => {
         console.log(err);
       })
   }
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
+  
   return (
     <div className="login-page">
       <h1>Welcome to the Bubble App!</h1>

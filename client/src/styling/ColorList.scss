@@ -1,4 +1,53 @@
 .logout-btn {
   position: absolute;
-  top: 50%;
+  top: 30px;
+  left: 400px;
+  width: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  color: white;
+  background: rgb(53, 53, 53);
+  transition: all .3s;
+
+  &:active {
+    background: rgb(100, 100, 100);
+  }
+}
+
+.add-color-form {
+  width: 90%;
+  margin: 50px auto;
+  padding: 20px 10px;
+  background: grey;
+  border-radius: 5px;
+
+  input {
+    width: 60%;
+    margin: 5px auto;
+    padding: 7px;
+    text-align: center;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+  }
+  button {
+    width: 40%;
+    margin: 5px auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background: rgb(53, 53, 53);
+    padding: 5px 0;
+    transition: all .3s;
+
+    &:active {
+      background: rgb(100, 100, 100);
+    }
+  }
 }

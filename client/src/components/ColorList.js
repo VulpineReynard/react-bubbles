@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
-import { Redirect } from 'react-router-dom';
 
 const initialColor = {
   color: "",
@@ -10,7 +9,12 @@ const initialColor = {
 const ColorList = ({ colors, updateColors, ...props }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  console.log(props);
+  const [newColor, setNewColor] = useState({
+    code: {
+      hex: ''
+    },
+    color: ''
+  });
 
   const editColor = color => {
     setEditing(true);
@@ -43,6 +47,42 @@ const ColorList = ({ colors, updateColors, ...props }) => {
         })
   };
 
+  const handleChange = e => {
+    if(e.target.name === 'code') {
+      setNewColor({
+        ...newColor,
+        code: {
+          hex: e.target.value
+        }
+      })
+    } else {
+      setNewColor({
+        ...newColor,
+        [e.target.name]: e.target.value
+      })
+    }
+    console.log(newColor)
+  }
+
+  const addColor = (e, newColor) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('http://localhost:5000/api/colors', newColor)
+        .then(res => {
+          console.log(res);
+          updateColors(res.data);
+          setNewColor({
+            color: '',
+            code: {
+              hex: ''
+            }
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  }
+
   const logout = () => {
     localStorage.removeItem('token');
     props.props.history.push('/');
@@ -68,7 +108,7 @@ const ColorList = ({ colors, updateColors, ...props }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={saveEdit}>
+        <form className="edit-color-form" onSubmit={saveEdit}>
           <legend>edit color</legend>
           <label>
             color name:
@@ -97,7 +137,26 @@ const ColorList = ({ colors, updateColors, ...props }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
+      <div className="spacer">
+        <form onSubmit={(e) => addColor(e, newColor)} className="add-color-form">
+          <input 
+          name='color'
+          placeholder="Color Name"
+          onChange={(e) => handleChange(e)}
+          value={newColor.color}
+          required
+          />
+
+          <input 
+          name='code'
+          placeholder="Hex Code"
+          onChange={(e) => handleChange(e)}
+          value={newColor.code.hex}
+          required
+          />
+          <button type="submit">Add Color</button>
+        </form>
+      </div> 
       {/* stretch - build another form here to add a color */}
       <button onClick={logout} className="logout-btn">Logout</button>
     </div>
