@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import './login.scss';
+@import './bubbles.scss';
+@import './ColorList.scss';
 
 html,
 body,
@@ -60,10 +63,19 @@ body,
   margin-right: 36px;
 }
 
-form {
+.edit-color-form {
   margin-top: 60px;
   display: flex;
   flex-direction: column;
+  animation: fadeIn 1s;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    } 100% {
+      opacity: 1;
+    }
+  }
 
   legend {
     padding-left: 40px;
