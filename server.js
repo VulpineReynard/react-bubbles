@@ -104,11 +104,9 @@ app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "asdf" && password === "123") {
     req.loggedIn = true;
-    setTimeout(() => {
       res.status(200).json({
         payload: token
       });
-    }, 1000);
   } else {
     res
       .status(403)
